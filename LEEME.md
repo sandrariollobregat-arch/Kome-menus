@@ -1,40 +1,34 @@
-# Kome — cómo tener el icono en tu iPhone
+# Arreglo: pantalla en blanco al abrir el icono
 
-Claude no puede publicar una app nativa en la App Store (eso requiere Xcode,
-una cuenta de desarrollador de Apple y revisión de Apple). Pero esta carpeta
-es una **app web instalable**: una vez publicada en una dirección propia,
-podrás añadirla a tu pantalla de inicio con su icono, y se abrirá a
-pantalla completa como una app normal, sin la barra de Safari.
+Ahora todo el código vive en un único `index.html` (ya no depende de un
+segundo archivo `app.jsx`), así que hay mucho menos margen para que algo
+se pierda al subirlo.
 
-## 1. Publica los archivos (elige una opción, las dos son gratis)
+## Qué hacer en tu repositorio de GitHub
 
-**Opción fácil — Netlify Drop** (sin cuenta ni instalar nada):
-1. Ve a https://app.netlify.com/drop desde el ordenador.
-2. Arrastra esta carpeta completa (`kome-standalone`) a la página.
-3. Te dará una URL tipo `https://algo-al-azar.netlify.app`. Ábrela para comprobar que funciona.
+1. Entra en tu repo (`Kome-menus`) desde github.com en Safari.
+2. Borra los archivos antiguos:
+   - Toca `index.html` → icono de papelera (🗑) → confirma el borrado ("Commit changes").
+   - Haz lo mismo con `app.jsx` si existe en el listado.
+3. Sube los archivos nuevos de esta carpeta (`Add file` → `Upload files`,
+   selecciona TODOS los archivos de esta carpeta) → `Commit changes`.
+4. Espera 1-2 minutos a que GitHub Pages reconstruya el sitio.
 
-**Opción alternativa — GitHub Pages:**
-1. Crea un repositorio nuevo en GitHub y sube todos estos archivos.
-2. En Settings → Pages, activa GitHub Pages sobre la rama principal.
-3. Te dará una URL tipo `https://tuusuario.github.io/turepo`.
+## Después de subir: limpia la caché antes de probar
 
-Importante: no sirve con abrir `index.html` haciendo doble clic en el
-ordenador (protocolo `file://`) — necesita estar servida por una de estas
-webs para funcionar correctamente.
+Esto es importante — Safari e iOS cachean agresivamente:
 
-## 2. Añádela a la pantalla de inicio del iPhone
+1. En el iPhone, borra el icono actual de la pantalla de inicio (mantén
+   pulsado → Eliminar app).
+2. Ve a Ajustes → Safari → Avanzado → Datos de sitios web. Busca
+   "github.io", tócalo y elimínalo (esto borra la copia guardada de la
+   página antigua).
+3. Abre Safari, visita de nuevo tu URL
+   (`https://sandrariollobregat-arch.github.io/Kome-menus/`) y comprueba
+   que se ve bien la app (con colores y el menú).
+4. Solo si se ve bien ahí, vuelve a hacer "Compartir" → "Añadir a
+   pantalla de inicio".
 
-1. Abre la URL publicada con **Safari** en el iPhone (tiene que ser Safari, no Chrome).
-2. Toca el icono de compartir (el cuadrado con la flecha hacia arriba).
-3. Baja y toca **"Añadir a pantalla de inicio"**.
-4. Confirma el nombre ("Kome") y toca **Añadir**.
-
-A partir de ahí tendrás el icono del onigiri en tu pantalla de inicio, y al
-abrirla se abrirá a pantalla completa, como una app.
-
-## Notas
-- Todos los datos (rebost, menús, favoritos, histórico) se guardan solo en
-  el propio iPhone mediante el almacenamiento del navegador. No se envían a
-  ningún servidor ni a terceros.
-- Si más adelante quieres cambiar recetas o colores, todo el código de la
-  app está en `app.jsx`, en texto plano y comentado por secciones.
+Si al abrir la URL en Safari (paso 3) ves solo el texto "Cargando Kome…"
+sin que desaparezca, el problema es que algún script externo (React,
+Babel o las fuentes) no se está cargando — dímelo y seguimos desde ahí.
